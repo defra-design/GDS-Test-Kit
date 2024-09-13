@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+    <h1 class="govuk-heading-xl">
+      {{ serviceName }}
+    </h1>
+    
+    {% if entries.length > 0 %}
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--m">Names and addresses</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Name</th>
+            <th scope="col" class="govuk-table__header">Address</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for entry in entries %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">{{ entry.name }}</td>
+            <td class="govuk-table__cell">{{ entry.address }}</td>
+            <td class="govuk-table__cell"><a href="/remove-entry/{{ loop.index0 }}" onclick="return confirm('Are you sure you want to remove {{ entry.name }}?');">Remove</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No entries have been added yet.</p>
+    {% endif %}
+    <a href="/add-entry">Add a New Entry</a>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+    <h1 class="govuk-heading-xl">
+      {{ serviceName }}
+    </h1>
+    
+    <form action="/add-entry" method="post">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            What is your address?
+          </h1>
+        </legend>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="name">
+            Name
+          </label>
+          <input class="govuk-input" id="name" name="name" type="text" autocomplete="name">
+        </div>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="address">
+            Address
+          </label>
+          <input class="govuk-input" id="address" name="address" type="text" autocomplete="address">
+        </div>
+      </fieldset>
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+    <a href="/view-entries">View All Entries</a>
+
+  </div>
+</div>
+
+{% endblock %}

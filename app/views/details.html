@@ -1,0 +1,151 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<style>
+    /* Basic styling, you can adjust as needed */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f5f5f5;
+    }
+
+    h1 {
+        font-size: 2em;
+        color: #333;
+    }
+
+    .details-container {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .details-container p {
+        color: #555;
+    }
+
+    .details-container ul {
+        list-style-type: disc;
+        margin-left: 20px;
+        color: #555;
+    }
+
+    .details-container a {
+        color: #0078d4;
+        text-decoration: none;
+    }
+
+    .details-container a:hover {
+        text-decoration: underline;
+    }
+
+    .details-container .section-title {
+        font-weight: bold;
+        margin-top: 20px;
+        color: #333;
+    }
+</style>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+    <h1 class="govuk-heading-xl" id="useCaseTitle">
+      {{ serviceName }}
+    </h1>
+    
+   <div id="detailsContainer" class="details-container"></div>
+   
+   <a href="/card-list.html">Back to list</a>
+   
+   <script>
+       // Fetch the ID from the server-side rendering context (Nunjucks template variable)
+       const id = "{{ id }}"; // Assuming you are using Nunjucks for rendering
+   
+       // Fetch and display the full details of the selected entry
+       function fetchAndDisplayDetails() {
+           fetch('/public/javascripts/data.json') // Fetch the external JSON file
+               .then(response => {
+                   if (!response.ok) {
+                       throw new Error('Network response was not ok');
+                   }
+                   return response.json();
+               })
+               .then(data => {
+                   const item = data[id];
+                   displayDetails(item);
+               })
+               .catch(error => {
+                   console.error('There was a problem with the fetch operation:', error);
+                   displayError("An error occurred while loading the details.");
+               });
+       }
+   
+       // Function to display the full details of the selected service
+       function displayDetails(item) {
+           const container = document.getElementById('detailsContainer');
+   
+           const useCaseTitle = document.getElementById('useCaseTitle');
+           useCaseTitle.textContent = item.useCase;
+   
+           const userGroup = document.createElement('p');
+           const userGroupText = item.userGroup.map(group => `${group.count} ${group.type}`).join(', ');
+           userGroup.innerHTML = `<strong>Users:</strong> ${userGroupText}`;
+           container.appendChild(userGroup);
+   
+           const description = document.createElement('p');
+           description.innerHTML = `<strong>Description:</strong> ${item.description}`;
+           container.appendChild(description);
+   
+           const inputArtifacts = document.createElement('div');
+           inputArtifacts.className = 'section';
+           inputArtifacts.innerHTML = '<div class="section-title">Input Artefacts:</div>';
+           const inputList = document.createElement('ul');
+           item.inputArtefact.forEach(artifact => {
+               const listItem = document.createElement('li');
+               const link = document.createElement('a');
+               link.href = artifact.url;
+               link.textContent = artifact.name;
+               listItem.appendChild(link);
+               inputList.appendChild(listItem);
+           });
+           inputArtifacts.appendChild(inputList);
+           container.appendChild(inputArtifacts);
+   
+           const meansOfDelivery = document.createElement('p');
+           meansOfDelivery.className = 'section';
+           meansOfDelivery.innerHTML = `<div class="section-title">Means of Delivery:</div> ${item.meansOfDelivery.join(', ')}`;
+           container.appendChild(meansOfDelivery);
+   
+           const outputArtifacts = document.createElement('div');
+           outputArtifacts.className = 'section';
+           outputArtifacts.innerHTML = '<div class="section-title">Output Artefacts:</div>';
+           const outputList = document.createElement('ul');
+           item.outputArtefact.forEach(artifact => {
+               const listItem = document.createElement('li');
+               const link = document.createElement('a');
+               link.href = artifact.url;
+               link.textContent = artifact.name;
+               listItem.appendChild(link);
+               outputList.appendChild(listItem);
+           });
+           outputArtifacts.appendChild(outputList);
+           container.appendChild(outputArtifacts);
+       }
+   
+       document.addEventListener('DOMContentLoaded', fetchAndDisplayDetails);
+   </script>
+    
+   
+
+  </div>
+</div>
+
+{% endblock %}

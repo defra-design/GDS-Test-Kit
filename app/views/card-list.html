@@ -1,0 +1,163 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f5f5f5;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.2s;
+    }
+
+    .card h2 {
+        margin-top: 0;
+        font-size: 1.5em;
+        color: #333;
+    }
+
+    .card p {
+        color: #555;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .search-container {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-input {
+        padding: 10px;
+        font-size: 16px;
+        width: 100%;
+        max-width: 500px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+
+    <h1>Defra Services (Summary)</h1>
+    
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search for services...">
+    </div>
+    
+    <!-- Card Container -->
+    <div id="cardContainer" class="grid-container"></div> 
+    
+    <script>
+        let cardsData = [];
+    
+        // Function to fetch and generate the cards
+        function fetchAndGenerateCards() {
+            fetch('/public/javascripts/data.json') // Fetch the external JSON file
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    cardsData = data; // Store data in a global variable for filtering
+                    generateCards(data);
+                })
+                .catch(error => console.error('There was a problem with the fetch operation:', error));
+        }
+    
+        // Function to generate cards dynamically
+        function generateCards(data) {
+            const container = document.getElementById('cardContainer');
+            container.innerHTML = ''; // Clear previous cards
+    
+            data.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.index = index; // Store index as a dataset for filtering
+    
+                const useCase = document.createElement('h2');
+                useCase.textContent = item.useCase;
+                card.appendChild(useCase);
+    
+                const userGroup = document.createElement('p');
+                userGroup.className = 'user-group';
+                const userGroupText = item.userGroup.map(group => `${group.count} ${group.type}`).join(', ');
+                userGroup.textContent = `Users: ${userGroupText}`;
+                card.appendChild(userGroup);
+    
+                const description = document.createElement('p');
+                description.textContent = item.description.substring(0, 100) + "..."; // Short description
+                card.appendChild(description);
+    
+                // Create a form that POSTs to the detail page with the ID
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/details'; // This will be handled in routes.js
+    
+                // Add a hidden input to store the ID
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'id';
+                input.value = index;
+                form.appendChild(input);
+    
+                // Add a submit button to the form
+                const submitButton = document.createElement('button');
+                submitButton.type = 'submit';
+                submitButton.textContent = 'Read more';
+                form.appendChild(submitButton);
+    
+                card.appendChild(form); // Add the form to the card
+                container.appendChild(card);
+            });
+        }
+    
+        // Function to filter cards based on search input
+        function filterCards(searchTerm) {
+            const filteredData = cardsData.filter(item => {
+                const searchContent = `${item.useCase} ${item.description} ${item.userGroup.map(group => group.type).join(' ')}`.toLowerCase();
+                return searchContent.includes(searchTerm.toLowerCase());
+            });
+            generateCards(filteredData); // Regenerate cards with filtered data
+        }
+    
+        // Event listener for search input
+        document.getElementById('searchInput').addEventListener('input', function (e) {
+            const searchTerm = e.target.value;
+            filterCards(searchTerm); // Filter cards as the user types
+        });
+    
+        // Fetch and generate the cards when the page loads
+        document.addEventListener('DOMContentLoaded', fetchAndGenerateCards);
+    </script>
+   
+
+  </div>
+</div>
+
+{% endblock %}
