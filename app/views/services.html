@@ -1,0 +1,121 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<style>
+  
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 20px;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.2s;
+    }
+
+    .card h2 {
+        margin-top: 0;
+        font-size: 1.5em;
+        color: #333;
+    }
+
+    .card p {
+        color: #555;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .search-container {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        width:100%;
+    }
+
+    .search-input {
+        padding: 10px;
+        font-size: 16px;
+        width: 100%;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    button {
+      appearance: none;
+      border:0;
+      background: transparent;
+      color:#0078d4;
+      padding:0;
+      cursor:pointer;
+      text-decoration: underline;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+</style>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+
+    <h1 class="govuk-heading-l">All Services</h1>
+    
+    <!-- Search box to filter services -->
+    <div class="search-container">
+   <input type="text" id="searchInput" class="search-input" placeholder="Search services..." onkeyup="filterServices()">
+    </div>
+    
+    <div id="cardContainer" class="grid-container">
+        <!-- Loop through all serviceData items to render cards -->
+        {% for service in serviceData %}
+        <div class="card">
+            <h2 class="govuk-heading-m">{{ service['useCase'] }}</h2>
+            <p>{{ service['description'] | truncate(100) }}</p>
+    
+            <!-- Link to the detail page with a query parameter for the service ID -->
+            <form method="GET" action="/service-detail">
+                <input type="hidden" name="id" value="{{ loop.index0 }}">
+                <button type="submit">Read more</button>
+            </form>
+        </div>
+        {% else %}
+        <p>No services available.</p>
+        {% endfor %}
+    </div>
+
+
+   <script>
+   // Function to filter services based on search input
+   function filterServices() {
+       const input = document.getElementById('searchInput').value.toLowerCase();
+       const cards = document.querySelectorAll('.card');
+   
+       cards.forEach(card => {
+           const title = card.querySelector('h2').textContent.toLowerCase();
+           const description = card.querySelector('p').textContent.toLowerCase();
+   
+           if (title.includes(input) || description.includes(input)) {
+               card.classList.remove('hidden');
+           } else {
+               card.classList.add('hidden');
+           }
+       });
+   }
+   </script>
+   
+  </div>
+</div>
+
+{% endblock %}

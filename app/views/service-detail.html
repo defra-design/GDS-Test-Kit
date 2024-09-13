@@ -1,0 +1,91 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<style>
+    /* Basic styling, you can adjust as needed */
+
+    h1 {
+        font-size: 2em;
+        color: #333;
+    }
+
+    .details-container {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .details-container p {
+        color: #555;
+    }
+
+    .details-container ul {
+        list-style-type: disc;
+        margin-left: 20px;
+        color: #555;
+    }
+
+    .details-container a {
+        color: #0078d4;
+        text-decoration: none;
+    }
+
+    .details-container a:hover {
+        text-decoration: underline;
+    }
+
+    .details-container .section-title {
+        font-weight: bold;
+        margin-top: 20px;
+        color: #333;
+    }
+</style>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+   <h1 class="govuk-heading-l">{{ serviceData[serviceId]['useCase'] }}</h1>
+   
+   <div class="details-container">
+       <p><strong>Description:</strong> {{ serviceData[serviceId]['description'] }}</p>
+   
+       <p><strong>Users:</strong></p>
+       <ul>
+           {% for group in serviceData[serviceId]['userGroup'] %}
+           <li>{{ group['count'] }} {{ group['type'] }}</li>
+           {% endfor %}
+       </ul>
+   
+       <p><strong>Input Artefacts:</strong></p>
+       <ul>
+           {% for artefact in serviceData[serviceId]['inputArtefact'] %}
+           <li><a href="{{ artefact['url'] }}">{{ artefact['name'] }}</a></li>
+           {% endfor %}
+       </ul>
+   
+       <p><strong>Means of Delivery:</strong> {{ serviceData[serviceId]['meansOfDelivery'] | join(', ') }}</p>
+   
+       <p><strong>Provider/Owner:</strong> {{ serviceData[serviceId]['providerOwner'] }}</p>
+   
+       <p><strong>Output Artefacts:</strong></p>
+       <ul>
+           {% for artefact in serviceData[serviceId]['outputArtefact'] %}
+           <li><a href="{{ artefact['url'] }}">{{ artefact['name'] }}</a></li>
+           {% endfor %}
+       </ul>
+   
+   </div>
+   
+   <p><a href="/services">Back to all services</a></p>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,218 @@
+[
+  {
+	"useCase": "Land Use Change Monitoring",
+	"userGroup": [
+	  { "type": "Government Officials", "count": 20 },
+	  { "type": "Environmental Analysts", "count": 15 }
+	],
+	"description": "A system to monitor land use changes across the UK using satellite imagery and geospatial data. **Provides monthly reports**.",
+	"inputArtefact": [
+	  { "name": "Satellite Imagery", "url": "https://example.com/satellite-imagery" },
+	  { "name": "Geospatial Data", "url": "https://example.com/geospatial-data" }
+	],
+	"meansOfDelivery": ["Web Portal", "API"],
+	"providerOwner": "Defra Environmental Monitoring Team",
+	"outputArtefact": [
+	  { "name": "Land Use Report", "url": "https://example.com/land-use-report" },
+	  { "name": "Interactive Map", "url": "https://example.com/interactive-map" }
+	]
+  },
+  {
+	"useCase": "Agricultural Subsidy Application",
+	"userGroup": [
+	  { "type": "Farmers", "count": 2000 },
+	  { "type": "Land Agents", "count": 300 }
+	],
+	"description": "An online application service for farmers to apply for subsidies based on their land use and crop data. *Supports direct submission of farm data*.",
+	"inputArtefact": [
+	  { "name": "Farm Data Spreadsheet", "url": "https://example.com/farm-data" },
+	  { "name": "Land Parcel Data", "url": "https://example.com/land-parcel" }
+	],
+	"meansOfDelivery": ["Web Application"],
+	"providerOwner": "Defra Rural Payments Team",
+	"outputArtefact": [
+	  { "name": "Application Receipt", "url": "https://example.com/application-receipt" },
+	  { "name": "Subsidy Calculation", "url": "https://example.com/subsidy-calculation" }
+	]
+  },
+  {
+	"useCase": "Flood Risk Assessment",
+	"userGroup": [
+	  { "type": "Civil Engineers", "count": 50 },
+	  { "type": "Local Authorities", "count": 40 }
+	],
+	"description": "Tool for assessing flood risks in different regions using historical and predictive flood data. **Accessible by various local authorities**.",
+	"inputArtefact": [
+	  { "name": "Historical Flood Data", "url": "https://example.com/historical-flood" },
+	  { "name": "Weather Forecast Data", "url": "https://example.com/weather-forecast" }
+	],
+	"meansOfDelivery": ["Mobile App", "Web Portal"],
+	"providerOwner": "Environment Agency",
+	"outputArtefact": [
+	  { "name": "Flood Risk Report", "url": "https://example.com/flood-risk-report" },
+	  { "name": "Interactive Dashboard", "url": "https://example.com/dashboard" }
+	]
+  },
+  {
+	"useCase": "Biodiversity Tracking",
+	"userGroup": [
+	  { "type": "Conservationists", "count": 100 },
+	  { "type": "Academics", "count": 50 }
+	],
+	"description": "System to track biodiversity metrics across national parks and wildlife reserves. *Offers real-time updates*.",
+	"inputArtefact": [
+	  { "name": "Species Count Data", "url": "https://example.com/species-count" },
+	  { "name": "GPS Coordinates", "url": "https://example.com/gps-coordinates" }
+	],
+	"meansOfDelivery": ["API", "Web Dashboard"],
+	"providerOwner": "Natural England",
+	"outputArtefact": [
+	  { "name": "Biodiversity Report", "url": "https://example.com/biodiversity-report" },
+	  { "name": "Interactive Map", "url": "https://example.com/interactive-map" }
+	]
+  },
+  {
+	"useCase": "Waste Management Compliance",
+	"userGroup": [
+	  { "type": "Waste Disposal Companies", "count": 300 },
+	  { "type": "Local Councils", "count": 150 }
+	],
+	"description": "A compliance management tool for ensuring waste disposal meets regulatory standards. **Supports audit trails**.",
+	"inputArtefact": [
+	  { "name": "Waste Disposal Records", "url": "https://example.com/waste-disposal" },
+	  { "name": "Compliance Documents", "url": "https://example.com/compliance-documents" }
+	],
+	"meansOfDelivery": ["Web Portal", "Email Notifications"],
+	"providerOwner": "Defra Waste Management Team",
+	"outputArtefact": [
+	  { "name": "Compliance Certificate", "url": "https://example.com/compliance-certificate" },
+	  { "name": "Audit Report", "url": "https://example.com/audit-report" }
+	]
+  },
+  {
+	"useCase": "Air Quality Monitoring",
+	"userGroup": [
+	  { "type": "Health Officials", "count": 100 },
+	  { "type": "Researchers", "count": 30 }
+	],
+	"description": "An air quality monitoring platform that provides real-time data and historical trends. *Supports automated alerts for poor air quality*.",
+	"inputArtefact": [
+	  { "name": "Sensor Data", "url": "https://example.com/sensor-data" },
+	  { "name": "Weather Data", "url": "https://example.com/weather-data" }
+	],
+	"meansOfDelivery": ["API", "Mobile App"],
+	"providerOwner": "Air Quality Control Agency",
+	"outputArtefact": [
+	  { "name": "Air Quality Report", "url": "https://example.com/air-quality-report" },
+	  { "name": "Real-time Dashboard", "url": "https://example.com/dashboard" }
+	]
+  },
+  {
+	"useCase": "Water Quality Testing",
+	"userGroup": [
+	  { "type": "Water Companies", "count": 60 },
+	  { "type": "Environmental Regulators", "count": 40 }
+	],
+	"description": "A system for monitoring and reporting on water quality in reservoirs and treatment plants. **Real-time alerts for contamination**.",
+	"inputArtefact": [
+	  { "name": "Water Sample Data", "url": "https://example.com/water-sample" },
+	  { "name": "Chemical Test Results", "url": "https://example.com/chemical-test" }
+	],
+	"meansOfDelivery": ["Web Portal", "API"],
+	"providerOwner": "Defra Water Quality Team",
+	"outputArtefact": [
+	  { "name": "Water Quality Report", "url": "https://example.com/water-quality-report" },
+	  { "name": "Contamination Alert", "url": "https://example.com/contamination-alert" }
+	]
+  },
+  {
+	"useCase": "Animal Disease Outbreak Response",
+	"userGroup": [
+	  { "type": "Veterinarians", "count": 50 },
+	  { "type": "Farmers", "count": 500 }
+	],
+	"description": "A platform to coordinate responses to animal disease outbreaks with real-time communication between stakeholders. *Includes outbreak status updates*.",
+	"inputArtefact": [
+	  { "name": "Animal Health Records", "url": "https://example.com/animal-health" },
+	  { "name": "Outbreak Data", "url": "https://example.com/outbreak-data" }
+	],
+	"meansOfDelivery": ["Web Application", "SMS Alerts"],
+	"providerOwner": "Defra Animal Health Unit",
+	"outputArtefact": [
+	  { "name": "Outbreak Status Report", "url": "https://example.com/outbreak-report" },
+	  { "name": "Action Plan", "url": "https://example.com/action-plan" }
+	]
+  },
+  {
+	"useCase": "Fisheries Data Management",
+	"userGroup": [
+	  { "type": "Fishermen", "count": 500 },
+	  { "type": "Marine Biologists", "count": 50 }
+	],
+	"description": "A fisheries management system for tracking catch data, quota usage, and marine health metrics. **Supports automated quota tracking**.",
+	"inputArtefact": [
+	  { "name": "Catch Data", "url": "https://example.com/catch-data" },
+	  { "name": "Quota Data", "url": "https://example.com/quota-data" }
+	],
+	"meansOfDelivery": ["Web Portal", "Mobile App"],
+	"providerOwner": "Marine Management Organisation",
+	"outputArtefact": [
+	  { "name": "Quota Usage Report", "url": "https://example.com/quota-report" },
+	  { "name": "Marine Health Metrics", "url": "https://example.com/marine-health" }
+	]
+  },
+  {
+	"useCase": "Sustainable Farming Practices",
+	"userGroup": [
+	  { "type": "Farmers", "count": 1000 },
+	  { "type": "Agricultural Consultants", "count": 150 }
+	],
+	"description": "A tool for promoting and monitoring sustainable farming practices, providing advice on reducing environmental impact. *Includes actionable tips for soil and water conservation*.",
+	"inputArtefact": [
+	  { "name": "Farm Data", "url": "https://example.com/farm-data" },
+	  { "name": "Sustainability Metrics", "url": "https://example.com/sustainability-metrics" }
+	],
+	"meansOfDelivery": ["Mobile App", "Web Portal"],
+	"providerOwner": "Defra Agriculture Team",
+	"outputArtefact": [
+	  { "name": "Sustainability Report", "url": "https://example.com/sustainability-report" },
+	  { "name": "Conservation Guidelines", "url": "https://example.com/conservation-guidelines" }
+	]
+  },
+  {
+	"useCase": "Food Safety Standards Compliance",
+	"userGroup": [
+	  { "type": "Food Inspectors", "count": 80 },
+	  { "type": "Manufacturers", "count": 120 }
+	],
+	"description": "A service to ensure food safety standards compliance, allowing inspectors and manufacturers to report and resolve issues quickly. *Supports real-time issue tracking*.",
+	"inputArtefact": [
+	  { "name": "Inspection Reports", "url": "https://example.com/inspection-reports" },
+	  { "name": "Compliance Guidelines", "url": "https://example.com/compliance-guidelines" }
+	],
+	"meansOfDelivery": ["Web Portal", "Mobile App"],
+	"providerOwner": "Food Standards Agency",
+	"outputArtefact": [
+	  { "name": "Compliance Report", "url": "https://example.com/compliance-report" },
+	  { "name": "Issue Resolution History", "url": "https://example.com/issue-history" }
+	]
+  },
+  {
+	"useCase": "Farming Equipment Leasing Management",
+	"userGroup": [
+	  { "type": "Farmers", "count": 700 },
+	  { "type": "Leasing Agents", "count": 100 }
+	],
+	"description": "A platform to manage the leasing of farming equipment, helping both farmers and leasing agents track leases and returns. *Includes automated lease notifications*.",
+	"inputArtefact": [
+	  { "name": "Lease Agreements", "url": "https://example.com/lease-agreements" },
+	  { "name": "Equipment Inventory", "url": "https://example.com/equipment-inventory" }
+	],
+	"meansOfDelivery": ["Web Portal", "Email Notifications"],
+	"providerOwner": "Defra Leasing Team",
+	"outputArtefact": [
+	  { "name": "Lease Status Report", "url": "https://example.com/lease-status" },
+	  { "name": "Return Schedule", "url": "https://example.com/return-schedule" }
+	]
+  }
+]

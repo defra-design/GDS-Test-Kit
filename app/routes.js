@@ -62,3 +62,25 @@ router.get('/details/:id', function (req, res) {
 	const id = req.params.id; // Get the ID from the URL
 	res.render('details', { id: id }); // Pass the ID to the details page
 });
+
+// nunjucks version 
+
+const serviceData = require('./data/data.json')
+
+router.use(function(req, res, next){
+  res.locals.serviceData = serviceData
+  next()
+})
+
+// Route to display all services
+router.get('/services', function (req, res) {
+  res.render('services.html');  // No data passed; serviceData is directly accessed in the template
+});
+
+// Route to display details for a specific service (accessed via query parameter)
+router.get('/service-detail', function (req, res) {
+  const serviceId = req.query.id;  // Get service ID from query parameters
+  res.render('service-detail.html', { serviceId: serviceId }); // Pass service ID to template
+});
+
+module.exports = router;
