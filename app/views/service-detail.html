@@ -13,12 +13,10 @@
     }
 
     .details-container {
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 20px;
+        background-color:#f8f8f8;
+        padding: 2rem;
         max-width: 800px;
-        margin: 0 auto;
+        margin: 1rem auto;
     }
 
     .details-container p {
@@ -54,28 +52,28 @@
    <h1 class="govuk-heading-l">{{ serviceData[serviceId]['useCase'] }}</h1>
    
    <div class="details-container">
-       <p><strong>Description:</strong> {{ serviceData[serviceId]['description'] }}</p>
+       <p><strong>Description</strong><br>{{ serviceData[serviceId]['description'] }}</p>
    
-       <p><strong>Users:</strong></p>
-       <ul>
+       <p><strong>Users</strong></p>
+       <ul class="govuk-list govuk-list--bullet">
            {% for group in serviceData[serviceId]['userGroup'] %}
            <li>{{ group['count'] }} {{ group['type'] }}</li>
            {% endfor %}
        </ul>
    
-       <p><strong>Input Artefacts:</strong></p>
-       <ul>
+       <p><strong>Input Artefacts</strong></p>
+       <ul class="govuk-list govuk-list--bullet">
            {% for artefact in serviceData[serviceId]['inputArtefact'] %}
            <li><a href="{{ artefact['url'] }}">{{ artefact['name'] }}</a></li>
            {% endfor %}
        </ul>
    
-       <p><strong>Means of Delivery:</strong> {{ serviceData[serviceId]['meansOfDelivery'] | join(', ') }}</p>
+       <p><strong>Means of Delivery</strong><br>{{ serviceData[serviceId]['meansOfDelivery'] | join(', ') }}</p>
    
-       <p><strong>Provider/Owner:</strong> {{ serviceData[serviceId]['providerOwner'] }}</p>
+       <p><strong>Provider/Owner</strong><br>{{ serviceData[serviceId]['providerOwner'] }}</p>
    
-       <p><strong>Output Artefacts:</strong></p>
-       <ul>
+       <p><strong>Output Artefacts</strong></p>
+       <ul class="govuk-list govuk-list--bullet">
            {% for artefact in serviceData[serviceId]['outputArtefact'] %}
            <li><a href="{{ artefact['url'] }}">{{ artefact['name'] }}</a></li>
            {% endfor %}
