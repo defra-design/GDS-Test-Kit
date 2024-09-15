@@ -48,38 +48,70 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-
    <h1 class="govuk-heading-l">{{ serviceData[serviceId]['useCase'] }}</h1>
    
-   <div class="details-container">
-       <p><strong>Description</strong><br>{{ serviceData[serviceId]['description'] }}</p>
-   
-       <p><strong>Users</strong></p>
-       <ul class="govuk-list govuk-list--bullet">
-           {% for group in serviceData[serviceId]['userGroup'] %}
-           <li>{{ group['count'] }} {{ group['type'] }}</li>
-           {% endfor %}
-       </ul>
-   
-       <p><strong>Input Artefacts</strong></p>
-       <ul class="govuk-list govuk-list--bullet">
-           {% for artefact in serviceData[serviceId]['inputArtefact'] %}
-           <li><a href="{{ artefact['url'] }}">{{ artefact['name'] }}</a></li>
-           {% endfor %}
-       </ul>
-   
-       <p><strong>Means of Delivery</strong><br>{{ serviceData[serviceId]['meansOfDelivery'] | join(', ') }}</p>
-   
-       <p><strong>Provider/Owner</strong><br>{{ serviceData[serviceId]['providerOwner'] }}</p>
-   
-       <p><strong>Output Artefacts</strong></p>
-       <ul class="govuk-list govuk-list--bullet">
-           {% for artefact in serviceData[serviceId]['outputArtefact'] %}
-           <li><a href="{{ artefact['url'] }}">{{ artefact['name'] }}</a></li>
-           {% endfor %}
-       </ul>
-   
-   </div>
+   <dl class="govuk-summary-list">
+     <div class="govuk-summary-list__row">
+       <dt class="govuk-summary-list__key">
+         Description
+       </dt>
+       <dd class="govuk-summary-list__value">
+         {{ serviceData[serviceId]['description'] }}
+       </dd>
+     </div>
+     <div class="govuk-summary-list__row">
+       <dt class="govuk-summary-list__key">
+         Users
+       </dt>
+       <dd class="govuk-summary-list__value">
+         <ul class="govuk-list govuk-list--bullet">
+         {% for artefact in serviceData[serviceId]['inputArtefact'] %}
+          <li><a href="{{ artefact['url'] }}">{{ artefact['name'] }}</a></li>
+          {% endfor %}
+         </ul>
+       </dd>
+     </div>
+     <div class="govuk-summary-list__row">
+       <dt class="govuk-summary-list__key">
+         Input Artefacts
+       </dt>
+       <dd class="govuk-summary-list__value">
+         <ul class="govuk-list govuk-list--bullet">
+              {% for artefact in serviceData[serviceId]['inputArtefact'] %}
+              <li><a href="{{ artefact['url'] }}">{{ artefact['name'] }}</a></li>
+              {% endfor %}
+          </ul>
+       </dd>
+     </div>
+     <div class="govuk-summary-list__row">
+       <dt class="govuk-summary-list__key">
+         Means of Delivery
+       </dt>
+       <dd class="govuk-summary-list__value">
+         <p class="govuk-body">{{ serviceData[serviceId]['meansOfDelivery'] | join(', ') }}</p>
+       </dd>
+     </div>
+     <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Provider/Owner
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">{{ serviceData[serviceId]['providerOwner'] }}</p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+         <dt class="govuk-summary-list__key">
+           Output Artefacts
+         </dt>
+         <dd class="govuk-summary-list__value">
+           <ul class="govuk-list govuk-list--bullet">
+                {% for artefact in serviceData[serviceId]['outputArtefact'] %}
+                <li><a href="{{ artefact['url'] }}">{{ artefact['name'] }}</a></li>
+                {% endfor %}
+            </ul>
+         </dd>
+       </div>
+   </dl>
    
    <p><a href="/services">Back to all services</a></p>
 
