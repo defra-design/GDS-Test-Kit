@@ -9,17 +9,92 @@
     
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
     
-    <h1>{{ service['User facing name'] }}</h1>
-    
-    <p><strong>Type:</strong> {{ service['Type'] }}</p>
-    <p><strong>Provider:</strong> {{ service['Provider'] }}</p>
-    <p><strong>User Groups:</strong> {{ service['User groups'] }}</p>
-    <p><strong>Enables the user to:</strong> {{ service['Enables the user to'] }}</p>
-    <p><strong>Policy Outcome:</strong> {{ service['Policy outcome'] }}</p>
-    <p><strong>Volume of users:</strong> {{ service['Volume of users'] }}</p>
-    <p><strong>User location:</strong> {{ service['User location'] }}</p>
-    <p><strong>Owner:</strong> {{ service['Owner'] }}</p>
-    <p><strong>Links:</strong> <a href="{{ service['Links'] }}" target="_blank">{{ service['Links'] }}</a></p>
+    <h1 class="govuk-heading-l">{{ service['User facing name'] }}</h1>
+        
+    <dl class="govuk-summary-list">
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['Type'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Provider
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['Provider'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            User Groups
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['User groups'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Enables the user to
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['Enables the user to'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Policy Outcome
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['Policy outcome'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Volume of users
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['Volume of users'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            User location
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['User location'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Owner
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['Owner'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Links
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <a href="{{ service['Links'] }}" target="_blank">{{ service['Links'] }}</a>
+          </dd>
+        </div>
+      
+      </dl>
     
     <a href="/list-service/{{ groupIndex }}">Back to Service List</a>
     

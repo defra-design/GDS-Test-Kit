@@ -8,10 +8,9 @@
   <div class="govuk-grid-column-full">
 
 
-    <h1>Defra Services</h1>
+    <h1 class="govuk-heading-l">Defra Services</h1>
     
-    <h1>Delivery Groups</h1>
-    <ul>
+    <ul class="govuk-list">
        {% for group in deliveryGroups %}
          <li><a href="/list-service/{{ loop.index0 }}">{{ group }}</a></li>
        {% endfor %}
