@@ -4,15 +4,75 @@
 
 {% block content %}
 
+<style>
+  
+  .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 20px 0 0 0;
+      padding:0;
+      list-style-type: none;
+  }
+  
+  .card {
+      background-color: white;
+      padding: 2rem;
+      transition: transform 0.2s;
+      border:1px solid #ccc;
+      border-bottom:5px solid #24569C;
+  }
+  
+  .card h2 {
+      margin-top: 0;
+      font-size: 1.5em;
+      color: #333;
+  }
+  
+  .card p {
+      color: #555;
+  }
+  
+  .card:hover {
+      transform: scale(1.05);
+  }
+  
+  .search-container {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      width:100%;
+  }
+  
+  #searchInput {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      border: 1px solid #ccc;
+  }
+  
+  .hidden {
+      display: none;
+  }
+  
+</style>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     
-    <h1>Services for Delivery Group: {{ group }}</h1>
-    <ul>
+    <h1 class="govuk-heading-l">Services for the {{ group }} Delivery Group</h1>
+    
+    <div class="search-container">
+    <!-- Search input -->
+    <input type="text" id="searchInput" onkeyup="filterServices()" placeholder="Start typing to filter services" aria-label="Search for services">
+    </div>
+    
+    <ul id="servicesList" class="grid-container">
        {% for service in services %}
-         <li>
-           <a href="/view-service/{{ loop.index0 + groupIndex }}">{{ service['User facing name'] }}</a>
-           - {{ service['Type'] }} provided by {{ service['Provider'] }}
+         <li class="card service-item">
+           <!-- Pass the actual index of the service in the dataset -->
+           <h2><a href="/view-service/{{ service.index }}/{{ groupIndex }}">{{ service['User facing name'] }}</a></h2>
+           <p>{{ service['Type'] }} provided by {{ service['Provider'] }}</p>
          </li>
        {% endfor %}
     </ul>
@@ -20,5 +80,27 @@
     
   </div>
 </div>
+
+<script>
+  function filterServices() {
+    // Declare variables
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('searchInput');
+    filter = input.value.toLowerCase();
+    ul = document.getElementById("servicesList");
+    li = ul.getElementsByClassName('service-item');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("a")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toLowerCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
+</script>
 
 {% endblock %}

@@ -7,6 +7,8 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+    
     <h1>{{ service['User facing name'] }}</h1>
     
     <p><strong>Type:</strong> {{ service['Type'] }}</p>
@@ -19,7 +21,7 @@
     <p><strong>Owner:</strong> {{ service['Owner'] }}</p>
     <p><strong>Links:</strong> <a href="{{ service['Links'] }}" target="_blank">{{ service['Links'] }}</a></p>
     
-    <a href="/list-service/{{ serviceIndex }}">Back to Service List</a>
+    <a href="/list-service/{{ groupIndex }}">Back to Service List</a>
     
   </div>
 </div>

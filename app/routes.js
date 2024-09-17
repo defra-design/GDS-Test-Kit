@@ -89,7 +89,10 @@ const newdata = require('./data/newdata.json');
 
 // Route for listing Delivery Groups
 router.get('/list-delivery', function (req, res) {
-  const deliveryGroups = [...new Set(newdata.map(item => item["Delivery Group"]))]; // Extract unique delivery groups
+  // Extract unique delivery groups and filter out any empty or null values
+  const deliveryGroups = [...new Set(newdata
+    .map(item => item["Delivery Group"])
+    .filter(group => group && group.trim()))]; // Filter out empty, null, or whitespace-only groups
   res.render('list-delivery.html', { deliveryGroups: deliveryGroups });
 });
 
@@ -97,16 +100,23 @@ router.get('/list-delivery', function (req, res) {
 router.get('/list-service/:groupIndex', function (req, res) {
   const groupIndex = parseInt(req.params.groupIndex);
   const deliveryGroup = [...new Set(newdata.map(item => item["Delivery Group"]))][groupIndex];
-  const services = newdata.filter(item => item["Delivery Group"] === deliveryGroup);
+  const services = newdata
+    .map((item, index) => ({ ...item, index })) // Attach the actual index of each service
+    .filter(item => 
+      item["Delivery Group"] === deliveryGroup && 
+      item["User facing name"] && 
+      item["User facing name"].trim() // Filter out services with empty or null "User facing name"
+    );
   res.render('list-service.html', { services: services, group: deliveryGroup, groupIndex: groupIndex });
 });
 
 // Route for viewing details of a specific service by index
-router.get('/view-service/:serviceIndex', function (req, res) {
+router.get('/view-service/:serviceIndex/:groupIndex', function (req, res) {
   const serviceIndex = parseInt(req.params.serviceIndex);
+  const groupIndex = parseInt(req.params.groupIndex);
   const service = newdata[serviceIndex];
   if (service) {
-    res.render('view-service.html', { service: service, serviceIndex: serviceIndex });
+    res.render('view-service.html', { service: service, groupIndex: groupIndex });
   } else {
     res.status(404).send('Service not found');
   }
