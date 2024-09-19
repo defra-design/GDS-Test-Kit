@@ -85,7 +85,7 @@ router.get('/service-detail', function (req, res) {
 
 // second version of proto 
 
-const newdata = require('./data/newdata.json');
+const newdata = require('./data/newdata-v2.json');
 
 // Route for listing Delivery Groups
 router.get('/list-delivery', function (req, res) {
