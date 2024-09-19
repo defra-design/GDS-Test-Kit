@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName="Home" %}
+{% set pageName="Defra Delivery Groups" %}
 
 {% block content %}
 
@@ -8,14 +8,14 @@
   <div class="govuk-grid-column-full">
 
 
-    <h1 class="govuk-heading-l">Defra Services</h1>
-    
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
     <ul class="govuk-list">
        {% for group in deliveryGroups %}
          <li><a href="/list-service/{{ loop.index0 }}">{{ group }}</a></li>
        {% endfor %}
     </ul>
-    
+
   </div>
 </div>
 

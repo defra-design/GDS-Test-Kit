@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName="Home" %}
+{% set pageName=serviceName %}
 
 {% block content %}
 
@@ -60,15 +60,15 @@
     <h1 class="govuk-heading-xl" id="useCaseTitle">
       {{ serviceName }}
     </h1>
-    
+
    <div id="detailsContainer" class="details-container"></div>
-   
+
    <a href="/card-list.html">Back to list</a>
-   
+
    <script>
        // Fetch the ID from the server-side rendering context (Nunjucks template variable)
        const id = "{{ id }}"; // Assuming you are using Nunjucks for rendering
-   
+
        // Fetch and display the full details of the selected entry
        function fetchAndDisplayDetails() {
            fetch('/public/javascripts/data.json') // Fetch the external JSON file
@@ -87,23 +87,23 @@
                    displayError("An error occurred while loading the details.");
                });
        }
-   
+
        // Function to display the full details of the selected service
        function displayDetails(item) {
            const container = document.getElementById('detailsContainer');
-   
+
            const useCaseTitle = document.getElementById('useCaseTitle');
            useCaseTitle.textContent = item.useCase;
-   
+
            const userGroup = document.createElement('p');
            const userGroupText = item.userGroup.map(group => `${group.count} ${group.type}`).join(', ');
            userGroup.innerHTML = `<strong>Users:</strong> ${userGroupText}`;
            container.appendChild(userGroup);
-   
+
            const description = document.createElement('p');
            description.innerHTML = `<strong>Description:</strong> ${item.description}`;
            container.appendChild(description);
-   
+
            const inputArtifacts = document.createElement('div');
            inputArtifacts.className = 'section';
            inputArtifacts.innerHTML = '<div class="section-title">Input Artefacts:</div>';
@@ -118,12 +118,12 @@
            });
            inputArtifacts.appendChild(inputList);
            container.appendChild(inputArtifacts);
-   
+
            const meansOfDelivery = document.createElement('p');
            meansOfDelivery.className = 'section';
            meansOfDelivery.innerHTML = `<div class="section-title">Means of Delivery:</div> ${item.meansOfDelivery.join(', ')}`;
            container.appendChild(meansOfDelivery);
-   
+
            const outputArtifacts = document.createElement('div');
            outputArtifacts.className = 'section';
            outputArtifacts.innerHTML = '<div class="section-title">Output Artefacts:</div>';
@@ -139,11 +139,11 @@
            outputArtifacts.appendChild(outputList);
            container.appendChild(outputArtifacts);
        }
-   
+
        document.addEventListener('DOMContentLoaded', fetchAndDisplayDetails);
    </script>
-    
-   
+
+
 
   </div>
 </div>
