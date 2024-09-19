@@ -1,0 +1,27 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<style>
+  
+  
+</style>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    
+    <h1 class="govuk-heading-l">Delivery Groups</h1>
+        
+    <ul class="govuk-list">
+      {% for group in deliveryGroups %}
+        <li><a href="/view-service-groups/{{ loop.index0 }}">{{ group }}</a></li>
+      {% endfor %}
+    </ul>
+        
+  </div>
+</div>
+
+
+{% endblock %}

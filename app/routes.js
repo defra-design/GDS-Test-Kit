@@ -122,4 +122,85 @@ router.get('/view-service/:serviceIndex/:groupIndex', function (req, res) {
   }
 });
 
+// super complex version as requested 
+
+// Load JSON data using require
+const newserviceData = require('./data/newdata-v2.json');
+
+// Helper function to get unique delivery groups
+function getUniqueDeliveryGroups(data) {
+  return data
+    .map(item => item["Delivery Group"])
+    .filter((group, index, self) => typeof group === 'string' && group.trim() && self.indexOf(group) === index);
+}
+
+// Helper function to get service groups for a specific delivery group
+function getServiceGroups(data, deliveryGroup) {
+  return data
+    .filter(item => item['Delivery Group'] === deliveryGroup)
+    .map(item => item['Service line'])
+    .filter((group, index, self) => typeof group === 'string' && group.trim() && self.indexOf(group) === index);
+}
+
+// Helper function to get services for a specific service group
+function getServices(data, serviceGroup) {
+  return data.filter(item => item['Service line'] === serviceGroup);
+}
+
+// Route for listing Delivery Groups
+router.get('/view-delivery-groups', function (req, res) {
+  const deliveryGroups = getUniqueDeliveryGroups(newserviceData);
+  res.render('view-delivery-groups', { deliveryGroups });
+});
+
+// Route for listing Service Groups by delivery group index
+router.get('/view-service-groups/:deliveryGroupIndex', function (req, res) {
+  const deliveryGroupIndex = req.params.deliveryGroupIndex;
+  const deliveryGroups = getUniqueDeliveryGroups(newserviceData);
+  const selectedDeliveryGroup = deliveryGroups[deliveryGroupIndex];  // Get selected delivery group by index
+  const serviceGroups = getServiceGroups(newserviceData, selectedDeliveryGroup);
+  res.render('view-service-groups', { serviceGroups, deliveryGroupIndex, selectedDeliveryGroup });
+});
+
+// Route for listing Services by service group index
+router.get('/view-services/:deliveryGroupIndex/:serviceGroupIndex', function (req, res) {
+  const deliveryGroupIndex = req.params.deliveryGroupIndex;
+  const serviceGroupIndex = req.params.serviceGroupIndex;
+  
+  const deliveryGroups = getUniqueDeliveryGroups(newserviceData);
+  const selectedDeliveryGroup = deliveryGroups[deliveryGroupIndex];  // Get selected delivery group by index
+  const serviceGroups = getServiceGroups(newserviceData, selectedDeliveryGroup);
+  const selectedServiceGroup = serviceGroups[serviceGroupIndex];  // Get selected service group by index
+  
+  const services = getServices(newserviceData, selectedServiceGroup);
+  
+  // Pass the names for descriptive H1s
+  res.render('view-services', { services, deliveryGroupIndex, serviceGroupIndex, selectedDeliveryGroup, selectedServiceGroup });
+});
+
+// Route for displaying Service Info by service index
+router.get('/service-info/:deliveryGroupIndex/:serviceGroupIndex/:serviceIndex', function (req, res) {
+  const deliveryGroupIndex = req.params.deliveryGroupIndex;
+  const serviceGroupIndex = req.params.serviceGroupIndex;
+  const serviceIndex = req.params.serviceIndex;
+
+  const deliveryGroups = getUniqueDeliveryGroups(newserviceData);
+  const selectedDeliveryGroup = deliveryGroups[deliveryGroupIndex];
+  const serviceGroups = getServiceGroups(newserviceData, selectedDeliveryGroup);
+  const selectedServiceGroup = serviceGroups[serviceGroupIndex];
+  const services = getServices(newserviceData, selectedServiceGroup);
+  const selectedService = services[serviceIndex];  // Get service by index
+  
+  // Pass all necessary variables to the template
+  res.render('service-info', {
+    selectedDeliveryGroup,
+    selectedServiceGroup,
+    selectedService,
+    deliveryGroupIndex,
+    serviceGroupIndex,
+    serviceIndex
+  });
+});
+
 module.exports = router;
+

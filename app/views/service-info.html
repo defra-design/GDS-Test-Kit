@@ -1,0 +1,207 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+    
+    <h1 class="govuk-heading-l">{{ selectedService['User facing name'] }} <!--(Service Group: {{ selectedServiceGroup }}, Delivery Group: {{ selectedDeliveryGroup }})--></h1>
+    
+    <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item"><a href="/view-delivery-groups">Delivery Groups</a></li>
+        <li class="govuk-breadcrumbs__list-item"><a href="/view-service-groups/{{ deliveryGroupIndex }}">Service Groups for {{ selectedDeliveryGroup }}</a></li>
+        <li class="govuk-breadcrumbs__list-item"><a href="/view-services/{{ deliveryGroupIndex }}/{{ serviceGroupIndex }}">Services for {{ selectedServiceGroup }}</a></li>
+      </ol>
+    </nav>
+        
+    <dl class="govuk-summary-list">
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Internal name
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Internal name'] }}
+          </dd>
+        </div>
+       
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Type'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Provider
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Provider'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            User Groups
+          </dt>
+          <dd class="govuk-summary-list__value">
+             
+            {% set userlist = selectedService['User groups'] | split('; ') %}
+            
+            <ul class="govuk-list govuk-list--bullet">
+              {% for userlistitem in userlist %}
+                <li>{{ userlistitem }}</li>
+              {% endfor %}
+            </ul>
+            
+            <!--{{ selectedService['User groups'] }}-->
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Enables the user to
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Enables the user to'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Policy Outcome
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Policy outcome'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Volume of users
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Volume of users'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            User location
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['User location'] }}
+          </dd>
+        </div>
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Owner
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Owner'] }}
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Inputs
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Inputs'] }}
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Outputs
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Outputs'] }}
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Platform
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% set platformlist = selectedService['Platform'] | split('; ') %}
+            
+            <ul class="govuk-list govuk-list--bullet">
+              {% for platformlistitem in platformlist %}
+                <li>{{ platformlistitem }}</li>
+              {% endfor %}
+            </ul>
+            <!--{{ selectedService['Platform'] }}-->
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Agile phase
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Agile phase'] }}
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Channels
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% set channellist = selectedService['Channels'] | split('; ') %}
+            
+            <ul class="govuk-list govuk-list--bullet">
+              {% for channellistitem in channellist %}
+                <li>{{ channellistitem }}</li>
+              {% endfor %}
+            </ul>
+            <!--{{ selectedService['Channels'] }}-->
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Dependencies
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Dependencies'] }}
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Cost
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ selectedService['Cost'] }}
+          </dd>
+        </div> 
+      
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Links
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <a href="{{ selectedService['Links'] }}" target="_blank">{{ selectedService['Links'] }}</a>
+          </dd>
+        </div>
+      
+      </dl>
+    
+    <a href="/list-service/{{ groupIndex }}">Back to Service List</a>
+    
+  </div>
+</div>
+
+{% endblock %}
