@@ -36,7 +36,16 @@
             User Groups
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ service['User groups'] }}
+             
+            {% set userlist = service['User groups'] | split('; ') %}
+            
+            <ul class="govuk-list">
+              {% for userlistitem in userlist %}
+                <li>{{ userlistitem }}</li>
+              {% endfor %}
+            </ul>
+            
+            <!--{{ service['User groups'] }}-->
           </dd>
         </div>
       
@@ -84,6 +93,33 @@
             {{ service['Owner'] }}
           </dd>
         </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Inputs
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['Inputs'] }}
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Outputs
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['Outputs'] }}
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Cost
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ service['Cost'] }}
+          </dd>
+        </div> 
       
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">

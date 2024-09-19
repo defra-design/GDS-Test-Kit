@@ -8,3 +8,6 @@ const addFilter = govukPrototypeKit.views.addFilter
 
 // Add your filters here
 
+addFilter('split', function(str, separator) {
+	return str.split(separator);
+});

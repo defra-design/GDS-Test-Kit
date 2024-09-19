@@ -36,7 +36,7 @@
     "Internal name": "Apply for Authorised Economic Operator status",
     "User groups": "Importers; Exporters; Customs Agents; Carriers; Port Operators",
     "Enables the user to": "Carry out their role in the movement of goods safely and legally",
-    "Policy outcome": "Demonstrates a business�s role in the international supply chain is secure and has customs control procedures that meet Authorised Economic Operator standards and criteria",
+    "Policy outcome": "Demonstrates a business's role in the international supply chain is secure and has customs control procedures that meet Authorised Economic Operator standards and criteria",
     "Volume of users": "Not known",
     "User location": "GB",
     "Cost": "",
@@ -74,7 +74,7 @@
     "Channels": "Digital",
     "Capability": "",
     "Value Stream": "",
-    "Links": "Start page template � Book live animal inspection � GOV.UK Prototype Kit (moving-animals-to-gb-f6ffdaf23605.herokuapp.com)",
+    "Links": "Start page template ' Book live animal inspection ' GOV.UK Prototype Kit (moving-animals-to-gb-f6ffdaf23605.herokuapp.com)",
     "Dependencies": ""
   },
   {
@@ -659,7 +659,7 @@
     "Lifecycle stage": "Operational",
     "Internal name": "UK Integrated Online Tariff",
     "User groups": "All trade users",
-    "Enables the user to": "Find a commodity code for goods you�re importing to or exporting from the UK.",
+    "Enables the user to": "Find a commodity code for goods you're importing to or exporting from the UK.",
     "Policy outcome": "Commodity code alignment to ensure that codes used in IPAFFS are the same as those used in the EU?",
     "Volume of users": "Not known",
     "User location": "UK",
