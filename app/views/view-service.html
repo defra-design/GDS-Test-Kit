@@ -39,7 +39,7 @@
              
             {% set userlist = service['User groups'] | split('; ') %}
             
-            <ul class="govuk-list">
+            <ul class="govuk-list govuk-list--bullet">
               {% for userlistitem in userlist %}
                 <li>{{ userlistitem }}</li>
               {% endfor %}
@@ -109,6 +109,22 @@
           </dt>
           <dd class="govuk-summary-list__value">
             {{ service['Outputs'] }}
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Platform
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% set platformlist = service['Platform'] | split('; ') %}
+            
+            <ul class="govuk-list govuk-list--bullet">
+              {% for platformlistitem in platformlist %}
+                <li>{{ platformlistitem }}</li>
+              {% endfor %}
+            </ul>
+            <!--{{ service['Platform'] }}-->
           </dd>
         </div>
         
