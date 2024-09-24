@@ -1,11 +1,11 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName="Home" %}
+{% set pageName = "Services for the " + group + " Delivery Group" %}
 
 {% block content %}
 
 <style>
-  
+
   .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -14,7 +14,7 @@
       padding:0;
       list-style-type: none;
   }
-  
+
   .card {
       background-color: white;
       padding: 2rem;
@@ -22,52 +22,52 @@
       border:1px solid #ccc;
       border-bottom:5px solid #24569C;
   }
-  
+
   .card h2 {
       margin-top: 0;
       font-size: 1.5em;
       color: #333;
   }
-  
+
   .card p {
       color: #555;
   }
-  
+
   .card:hover {
   }
-  
+
   .search-container {
       margin-bottom: 20px;
       display: flex;
       justify-content: center;
       width:100%;
   }
-  
+
   #searchInput {
       padding: 10px;
       font-size: 16px;
       width: 100%;
       border: 1px solid #ccc;
   }
-  
+
   .hidden {
       display: none;
   }
-  
+
 </style>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    
-    <h1 class="govuk-heading-l">Services for the {{ group }} Delivery Group</h1>
-    
+
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-    
+
     <div class="search-container">
     <!-- Search input -->
     <input type="text" id="searchInput" onkeyup="filterServices()" placeholder="Start typing to filter services" aria-label="Search for services">
     </div>
-    
+
     <ul id="servicesList" class="grid-container">
        {% for service in services %}
          <li class="card service-item">
@@ -77,9 +77,9 @@
          </li>
        {% endfor %}
     </ul>
-    
+
     <p style="margin-top: 20px"><a href="/list-delivery">Back to Delivery Groups</a></p>
-    
+
   </div>
 </div>
 

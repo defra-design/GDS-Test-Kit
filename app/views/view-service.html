@@ -1,18 +1,18 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName="Home" %}
+{% set pageName = service['User facing name'] %}
 
 {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    
+
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-    
+
     <h1 class="govuk-heading-l">{{ service['User facing name'] }}</h1>
-        
+
     <dl class="govuk-summary-list">
-      
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Internal name
@@ -21,7 +21,7 @@
             {{ service['Internal name'] }}
           </dd>
         </div>
-       
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Type
@@ -30,7 +30,7 @@
             {{ service['Type'] }}
           </dd>
         </div>
-      
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Provider
@@ -39,25 +39,25 @@
             {{ service['Provider'] }}
           </dd>
         </div>
-      
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             User Groups
           </dt>
           <dd class="govuk-summary-list__value">
-             
+
             {% set userlist = service['User groups'] | split('; ') %}
-            
+
             <ul class="govuk-list govuk-list--bullet">
               {% for userlistitem in userlist %}
                 <li>{{ userlistitem }}</li>
               {% endfor %}
             </ul>
-            
+
             <!--{{ service['User groups'] }}-->
           </dd>
         </div>
-      
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Enables the user to
@@ -66,7 +66,7 @@
             {{ service['Enables the user to'] }}
           </dd>
         </div>
-      
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Policy Outcome
@@ -75,7 +75,7 @@
             {{ service['Policy outcome'] }}
           </dd>
         </div>
-      
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Volume of users
@@ -84,7 +84,7 @@
             {{ service['Volume of users'] }}
           </dd>
         </div>
-      
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             User location
@@ -93,7 +93,7 @@
             {{ service['User location'] }}
           </dd>
         </div>
-      
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Owner
@@ -102,7 +102,7 @@
             {{ service['Owner'] }}
           </dd>
         </div>
-        
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Inputs
@@ -111,7 +111,7 @@
             {{ service['Inputs'] }}
           </dd>
         </div>
-        
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Outputs
@@ -120,14 +120,14 @@
             {{ service['Outputs'] }}
           </dd>
         </div>
-        
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Platform
           </dt>
           <dd class="govuk-summary-list__value">
             {% set platformlist = service['Platform'] | split('; ') %}
-            
+
             <ul class="govuk-list govuk-list--bullet">
               {% for platformlistitem in platformlist %}
                 <li>{{ platformlistitem }}</li>
@@ -136,7 +136,7 @@
             <!--{{ service['Platform'] }}-->
           </dd>
         </div>
-        
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Agile phase
@@ -145,14 +145,14 @@
             {{ service['Agile phase'] }}
           </dd>
         </div>
-        
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Channels
           </dt>
           <dd class="govuk-summary-list__value">
             {% set channellist = service['Channels'] | split('; ') %}
-            
+
             <ul class="govuk-list govuk-list--bullet">
               {% for channellistitem in channellist %}
                 <li>{{ channellistitem }}</li>
@@ -161,7 +161,7 @@
             <!--{{ service['Channels'] }}-->
           </dd>
         </div>
-        
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Dependencies
@@ -170,7 +170,7 @@
             {{ service['Dependencies'] }}
           </dd>
         </div>
-        
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Cost
@@ -178,8 +178,8 @@
           <dd class="govuk-summary-list__value">
             {{ service['Cost'] }}
           </dd>
-        </div> 
-      
+        </div>
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Links
@@ -188,11 +188,11 @@
             <a href="{{ service['Links'] }}" target="_blank">{{ service['Links'] }}</a>
           </dd>
         </div>
-      
+
       </dl>
-    
+
     <a href="/list-service/{{ groupIndex }}">Back to Service List</a>
-    
+
   </div>
 </div>
 

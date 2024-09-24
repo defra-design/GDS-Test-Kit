@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName="Home" %}
+{% set pageName = serviceData[serviceId]['useCase'] %}
 
 {% block content %}
 
@@ -49,7 +49,7 @@
   <div class="govuk-grid-column-two-thirds">
 
    <h1 class="govuk-heading-l">{{ serviceData[serviceId]['useCase'] }}</h1>
-   
+
    <dl class="govuk-summary-list">
      <div class="govuk-summary-list__row">
        <dt class="govuk-summary-list__key">
@@ -112,7 +112,7 @@
          </dd>
        </div>
    </dl>
-   
+
    <p style="margin-top: 20px"><a href="/services">Back to all services</a></p>
 
   </div>
