@@ -202,5 +202,36 @@ router.get('/service-info/:deliveryGroupIndex/:serviceGroupIndex/:serviceIndex',
   });
 });
 
+// Route for listing services by provider
+router.get('/services-by-provider/:provider', function (req, res) {
+  const provider = req.params.provider;
+
+  // Get all unique delivery groups and service groups
+  const deliveryGroups = getUniqueDeliveryGroups(newserviceData);
+
+  // Filter all services with the same provider
+  const servicesByProvider = newserviceData
+    .filter(service => service['Provider'] === provider)
+    .map(service => {
+      // Get indexes for delivery group and service group
+      const deliveryGroupIndex = deliveryGroups.indexOf(service['Delivery Group']);
+      const serviceGroups = getServiceGroups(newserviceData, service['Delivery Group']);
+      const serviceGroupIndex = serviceGroups.indexOf(service['Service line']);
+      const services = getServices(newserviceData, service['Service line']);
+      const serviceIndex = services.findIndex(s => s['User facing name'] === service['User facing name']);
+
+      return {
+        service,
+        deliveryGroupIndex,
+        serviceGroupIndex,
+        serviceIndex
+      };
+    });
+
+  // Pass the provider and the services with their indexes to the template
+  res.render('services-by-provider', { servicesByProvider, provider });
+});
+
+
 module.exports = router;
 

@@ -21,7 +21,9 @@
     <h1 class="govuk-heading-l">Service Groups for {{ selectedDeliveryGroup }}</h1>
        <ul class="govuk-list">
          {% for group in serviceGroups %}
-           <li><a href="/view-services/{{ deliveryGroupIndex }}/{{ loop.index0 }}">{{ group }}</a></li>
+           {% if group != "Moving goods into Great Britain;Moving goods out of Great Britain" %}
+             <li><a href="/view-services/{{ deliveryGroupIndex }}/{{ loop.index0 }}">{{ group }}</a></li>
+           {% endif %}
          {% endfor %}
        </ul>
   </div>
