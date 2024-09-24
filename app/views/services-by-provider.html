@@ -1,0 +1,85 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<style>
+  
+  .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 20px 0 0 0;
+      padding:0;
+      list-style-type: none;
+  }
+  
+  .card {
+      background-color: white;
+      padding: 2rem;
+      transition: transform 0.2s;
+      border:1px solid #ccc;
+      border-bottom:5px solid #24569C;
+  }
+  
+  .card h2 {
+      margin-top: 0;
+      font-size: 1.5em;
+      color: #333;
+  }
+  
+  .card p {
+      color: #555;
+  }
+  
+  .card:hover {
+  }
+  
+  .search-container {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      width:100%;
+  }
+  
+  #searchInput {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      border: 1px solid #ccc;
+  }
+  
+  .hidden {
+      display: none;
+  }
+  
+</style>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    
+    <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item"><a href="/view-delivery-groups">Delivery Groups</a></li>
+        <li class="govuk-breadcrumbs__list-item">Services provided by {{ provider }}</li>
+      </ol>
+    </nav>
+    
+    <h1 class="govuk-heading-l">Services provided by {{ provider }}</h1>
+        
+       <ul id="servicesList" class="grid-container">
+         {% for item in servicesByProvider %}
+           <li class="card service-item">
+             <h2><a class="govuk-link" href="/service-info/{{ item.deliveryGroupIndex }}/{{ item.serviceGroupIndex }}/{{ item.serviceIndex }}">{{ item.service['User facing name'] }}</a></h2>
+             <p class="govuk-body-m">{{ item.service['Enables the user to'] }}</p>
+             <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+             <p class="govuk-body-s">{{ item.service['Type'] }} provided by {{ item.service['Provider'] }}</p>
+             <p><a href="/services-by-provider/{{ item.service['Provider'] }}">{{ item.service['Provider'] }}</a></p>
+           </li>
+         {% endfor %}
+       </ul>
+  </div>
+</div>
+
+{% endblock %}
