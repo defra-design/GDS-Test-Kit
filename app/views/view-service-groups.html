@@ -19,10 +19,11 @@
     </nav>
 
     <h1 class="govuk-heading-l">Service Groups for {{ selectedDeliveryGroup }}</h1>
+    <h2 class="govuk-heading-s">View all products and services in the {{ selectedDeliveryGroup }} group</h2>
        <ul class="govuk-list">
          {% for group in serviceGroupCounts %}
            {% if group.serviceGroup != "Moving goods into Great Britain;Moving goods out of Great Britain" %}
-             <li><a href="/view-services/{{ deliveryGroupIndex }}/{{ loop.index0 }}">{{ group.serviceGroup }}</a>  ({{ group.serviceCount }} services)</li>
+             <li><a href="/view-services/{{ deliveryGroupIndex }}/{{ loop.index0 }}">{{ group.serviceGroup }}</a>  ({{ group.serviceCount }} products/services)</li>
            {% endif %}
          {% endfor %}
        </ul>
