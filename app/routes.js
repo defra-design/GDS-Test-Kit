@@ -158,9 +158,21 @@ router.get('/view-service-groups/:deliveryGroupIndex', function (req, res) {
   const deliveryGroupIndex = req.params.deliveryGroupIndex;
   const deliveryGroups = getUniqueDeliveryGroups(newserviceData);
   const selectedDeliveryGroup = deliveryGroups[deliveryGroupIndex];  // Get selected delivery group by index
+  
+  // Get service groups for the selected delivery group
   const serviceGroups = getServiceGroups(newserviceData, selectedDeliveryGroup);
-  res.render('view-service-groups', { serviceGroups, deliveryGroupIndex, selectedDeliveryGroup });
+  
+  // Calculate the number of services for each service group
+  const serviceGroupCounts = serviceGroups.map(serviceGroup => {
+    const serviceCount = newserviceData.filter(service => 
+      service['Service line'] === serviceGroup && service['Delivery Group'] === selectedDeliveryGroup
+    ).length;
+    return { serviceGroup, serviceCount };
+  });
+
+  res.render('view-service-groups', { serviceGroupCounts, deliveryGroupIndex, selectedDeliveryGroup });
 });
+
 
 // Route for listing Services by service group index
 router.get('/view-services/:deliveryGroupIndex/:serviceGroupIndex', function (req, res) {
