@@ -169,7 +169,7 @@ router.get('/view-service-groups/:deliveryGroupIndex', function (req, res) {
       ).length;
       return { serviceGroup, serviceCount };
     });
-    
+
     res.render('view-service-groups', { serviceGroupCounts, deliveryGroupIndex, selectedDeliveryGroup });
 });
 
@@ -242,6 +242,37 @@ router.get('/services-by-provider/:provider', function (req, res) {
 
   // Pass the provider and the services with their indexes to the template
   res.render('services-by-provider', { servicesByProvider, provider });
+});
+
+// Route for listing services by user group
+router.get('/services-for-user-group/:userGroup', function (req, res) {
+
+  const userGroup = req.params.userGroup;
+
+  // Get all unique delivery groups and service groups
+  const deliveryGroups = getUniqueDeliveryGroups(newserviceData);
+
+  // Filter all services for the same user group
+  const servicesForUserGroup = newserviceData
+    .filter(service => service['User groups'].includes(userGroup))
+    .map(service => {
+      // Get indexes for delivery group and service group
+      const deliveryGroupIndex = deliveryGroups.indexOf(service['Delivery Group']);
+      const serviceGroups = getServiceGroups(newserviceData, service['Delivery Group']);
+      const serviceGroupIndex = serviceGroups.indexOf(service['Service line']);
+      const services = getServices(newserviceData, service['Service line']);
+      const serviceIndex = services.findIndex(s => s['User facing name'] === service['User facing name']);
+
+      return {
+        service,
+        deliveryGroupIndex,
+        serviceGroupIndex,
+        serviceIndex
+      };
+    });
+
+  // Pass the user group and the services with their indexes to the template
+  res.render('services-for-user-group', { servicesForUserGroup, userGroup });
 });
 
 
