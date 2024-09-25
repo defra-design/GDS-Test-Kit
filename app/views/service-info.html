@@ -60,7 +60,11 @@
 
             <ul class="govuk-list govuk-list--bullet">
               {% for userlistitem in userlist %}
-                <li>{{ userlistitem }}</li>
+                <li>
+                  <a href="/services-for-user-group/{{userlistitem}}">
+                  {{ userlistitem }}
+                  </a>
+                </li>
               {% endfor %}
             </ul>
 
