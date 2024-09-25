@@ -169,8 +169,8 @@ router.get('/view-service-groups/:deliveryGroupIndex', function (req, res) {
       ).length;
       return { serviceGroup, serviceCount };
     });
+    
     res.render('view-service-groups', { serviceGroupCounts, deliveryGroupIndex, selectedDeliveryGroup });
-
 });
 
 
