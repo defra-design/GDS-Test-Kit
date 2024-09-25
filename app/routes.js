@@ -44,7 +44,7 @@ router.get('/remove-entry/:index', function (req, res) {
   res.redirect('/view-entries');
 });
 
-// cards 
+// cards
 
 // Route to render the card view (GET)
 router.get('/card-view', function (req, res) {
@@ -63,7 +63,7 @@ router.get('/details/:id', function (req, res) {
 	res.render('details', { id: id }); // Pass the ID to the details page
 });
 
-// nunjucks version 
+// nunjucks version
 
 const serviceData = require('./data/data.json')
 
@@ -83,7 +83,7 @@ router.get('/service-detail', function (req, res) {
   res.render('service-detail.html', { serviceId: serviceId }); // Pass service ID to template
 });
 
-// second version of proto 
+// second version of proto
 
 const newdata = require('./data/newdata-v2.json');
 
@@ -102,9 +102,9 @@ router.get('/list-service/:groupIndex', function (req, res) {
   const deliveryGroup = [...new Set(newdata.map(item => item["Delivery Group"]))][groupIndex];
   const services = newdata
     .map((item, index) => ({ ...item, index })) // Attach the actual index of each service
-    .filter(item => 
-      item["Delivery Group"] === deliveryGroup && 
-      item["User facing name"] && 
+    .filter(item =>
+      item["Delivery Group"] === deliveryGroup &&
+      item["User facing name"] &&
       item["User facing name"].trim() // Filter out services with empty or null "User facing name"
     );
   res.render('list-service.html', { services: services, group: deliveryGroup, groupIndex: groupIndex });
@@ -122,7 +122,7 @@ router.get('/view-service/:serviceIndex/:groupIndex', function (req, res) {
   }
 });
 
-// super complex version as requested 
+// super complex version as requested
 
 // Load JSON data using require
 const newserviceData = require('./data/newdata-v2.json');
@@ -158,22 +158,34 @@ router.get('/view-service-groups/:deliveryGroupIndex', function (req, res) {
   const deliveryGroupIndex = req.params.deliveryGroupIndex;
   const deliveryGroups = getUniqueDeliveryGroups(newserviceData);
   const selectedDeliveryGroup = deliveryGroups[deliveryGroupIndex];  // Get selected delivery group by index
+
+  // Get service groups for the selected delivery group
   const serviceGroups = getServiceGroups(newserviceData, selectedDeliveryGroup);
-  res.render('view-service-groups', { serviceGroups, deliveryGroupIndex, selectedDeliveryGroup });
+
+  // Calculate the number of services for each service group
+    const serviceGroupCounts = serviceGroups.map(serviceGroup => {
+      const serviceCount = newserviceData.filter(service =>
+        service['Service line'] === serviceGroup && service['Delivery Group'] === selectedDeliveryGroup
+      ).length;
+      return { serviceGroup, serviceCount };
+    });
+    res.render('view-service-groups', { serviceGroupCounts, deliveryGroupIndex, selectedDeliveryGroup });
+
 });
+
 
 // Route for listing Services by service group index
 router.get('/view-services/:deliveryGroupIndex/:serviceGroupIndex', function (req, res) {
   const deliveryGroupIndex = req.params.deliveryGroupIndex;
   const serviceGroupIndex = req.params.serviceGroupIndex;
-  
+
   const deliveryGroups = getUniqueDeliveryGroups(newserviceData);
   const selectedDeliveryGroup = deliveryGroups[deliveryGroupIndex];  // Get selected delivery group by index
   const serviceGroups = getServiceGroups(newserviceData, selectedDeliveryGroup);
   const selectedServiceGroup = serviceGroups[serviceGroupIndex];  // Get selected service group by index
-  
+
   const services = getServices(newserviceData, selectedServiceGroup);
-  
+
   // Pass the names for descriptive H1s
   res.render('view-services', { services, deliveryGroupIndex, serviceGroupIndex, selectedDeliveryGroup, selectedServiceGroup });
 });
@@ -190,7 +202,7 @@ router.get('/service-info/:deliveryGroupIndex/:serviceGroupIndex/:serviceIndex',
   const selectedServiceGroup = serviceGroups[serviceGroupIndex];
   const services = getServices(newserviceData, selectedServiceGroup);
   const selectedService = services[serviceIndex];  // Get service by index
-  
+
   // Pass all necessary variables to the template
   res.render('service-info', {
     selectedDeliveryGroup,
@@ -234,4 +246,3 @@ router.get('/services-by-provider/:provider', function (req, res) {
 
 
 module.exports = router;
-

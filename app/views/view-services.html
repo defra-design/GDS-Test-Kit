@@ -1,11 +1,11 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName="Home" %}
+{% set pageName="Services for " + selectedServiceGroup %}
 
 {% block content %}
 
 <style>
-  
+
   .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -14,7 +14,7 @@
       padding:0;
       list-style-type: none;
   }
-  
+
   .card {
       background-color: white;
       padding: 2rem;
@@ -22,64 +22,64 @@
       border:1px solid #ccc;
       border-bottom:5px solid #24569C;
   }
-  
+
   .card h2 {
       margin-top: 0;
       font-size: 1.5em;
       color: #333;
   }
-  
+
   .card p {
       color: #555;
   }
-  
+
   .card:hover {
   }
-  
+
   .search-container {
       margin-bottom: 20px;
       display: flex;
       justify-content: center;
       width:100%;
   }
-  
+
   #searchInput {
       padding: 10px;
       font-size: 16px;
       width: 100%;
       border: 1px solid #ccc;
   }
-  
+
   .hidden {
       display: none;
   }
-  
+
   .hiddenlink {
     color:#555;
     text-decoration: none;
   }
-  
+
   .hiddenlink:visited, .hiddenlink:active, .hiddenlink.govuk-link:visited, .hiddenlink:link  {
     color:#555;
     text-decoration: none;
   }
-  
+
 </style>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    
+
     <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
       <ol class="breadcrumbs govuk-breadcrumbs__list">
         <li class="govuk-breadcrumbs__list-item"><a href="/view-delivery-groups">Delivery Groups</a></li>
         <li class="govuk-breadcrumbs__list-item"><a href="/view-service-groups/{{ deliveryGroupIndex }}">Service Groups for {{ selectedDeliveryGroup }}</a></li>
       </ol>
     </nav>
-    
-    <h1 class="govuk-heading-l">Services for {{ selectedServiceGroup }}</h1>
-    
-    <h2 class="govuk-heading-m">{{ selectedDeliveryGroup }}</h2>
-    
+
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <h2 class="govuk-heading-s">View detailed information abvout products and services in the {{ selectedDeliveryGroup }} group</h2>
+
        <ul id="servicesList" class="grid-container">
          {% for service in services %}
            <li class="card service-item">

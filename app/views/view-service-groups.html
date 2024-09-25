@@ -1,28 +1,29 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName="Home" %}
+{% set pageName="Service Groups for " + selectedDeliveryGroup %}
 
 {% block content %}
 
 <style>
-  
-  
+
+
 </style>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-        
+
     <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
       <ol class="breadcrumbs govuk-breadcrumbs__list">
         <li class="govuk-breadcrumbs__list-item"><a href="/view-delivery-groups">Delivery Groups</a></li>
       </ol>
     </nav>
 
-    <h1 class="govuk-heading-l">Service Groups for {{ selectedDeliveryGroup }}</h1>
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+    <h2 class="govuk-heading-s">View all products and services in the {{ selectedDeliveryGroup }} group</h2>
        <ul class="govuk-list">
-         {% for group in serviceGroups %}
-           {% if group != "Moving goods into Great Britain;Moving goods out of Great Britain" %}
-             <li><a href="/view-services/{{ deliveryGroupIndex }}/{{ loop.index0 }}">{{ group }}</a></li>
+         {% for group in serviceGroupCounts %}
+           {% if group.serviceGroup != "Moving goods into Great Britain;Moving goods out of Great Britain" %}
+             <li><a href="/view-services/{{ deliveryGroupIndex }}/{{ loop.index0 }}">{{ group.serviceGroup }}</a> ({{ group.serviceCount }} products/services)</li>
            {% endif %}
          {% endfor %}
        </ul>
