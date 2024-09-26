@@ -186,9 +186,37 @@ router.get('/view-services/:deliveryGroupIndex/:serviceGroupIndex', function (re
 
   const services = getServices(newserviceData, selectedServiceGroup);
 
+
+  // Put the list in alphanumeric order by 'User facing name'
+  // Come back to this later!
+
   // Pass the names for descriptive H1s
   res.render('view-services', { services, deliveryGroupIndex, serviceGroupIndex, selectedDeliveryGroup, selectedServiceGroup });
 });
+
+
+// Route for listing Services by service group index in sequential order for the step by step
+router.get('/view-services-in-order/:deliveryGroupIndex/:serviceGroupIndex', function (req, res) {
+  const deliveryGroupIndex = req.params.deliveryGroupIndex;
+  const serviceGroupIndex = req.params.serviceGroupIndex;
+
+  const deliveryGroups = getUniqueDeliveryGroups(newserviceData);
+  const selectedDeliveryGroup = deliveryGroups[deliveryGroupIndex];  // Get selected delivery group by index
+  const serviceGroups = getServiceGroups(newserviceData, selectedDeliveryGroup);
+  const selectedServiceGroup = serviceGroups[serviceGroupIndex];  // Get selected service group by index
+
+  const services = getServices(newserviceData, selectedServiceGroup);
+
+
+  // Put the list in alphanumeric order by 'User facing name'
+  // Come back to this later!
+
+  // Pass the names for descriptive H1s
+  res.render('view-services-in-order', { services, deliveryGroupIndex, serviceGroupIndex, selectedDeliveryGroup, selectedServiceGroup });
+});
+
+
+
 
 // Route for displaying Service Info by service index
 router.get('/service-info/:deliveryGroupIndex/:serviceGroupIndex/:serviceIndex', function (req, res) {
@@ -240,6 +268,12 @@ router.get('/services-by-provider/:provider', function (req, res) {
       };
     });
 
+    // Put the list in alphanumeric order by 'User facing name'
+    servicesByProvider.sort(function(a, b) {
+       return a.service['User facing name'].localeCompare(b.service['User facing name']);
+    });
+
+
   // Pass the provider and the services with their indexes to the template
   res.render('services-by-provider', { servicesByProvider, provider });
 });
@@ -270,6 +304,13 @@ router.get('/services-for-user-group/:userGroup', function (req, res) {
         serviceIndex
       };
     });
+
+    // Put the list in alphanumeric order by 'User facing name'
+    servicesForUserGroup.sort(function(a, b) {
+       return a.service['User facing name'].localeCompare(b.service['User facing name']);
+    });
+
+    //servicesForUserGroup.sort()
 
   // Pass the user group and the services with their indexes to the template
   res.render('services-for-user-group', { servicesForUserGroup, userGroup });

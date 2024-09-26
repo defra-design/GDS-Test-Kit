@@ -19,7 +19,8 @@
     </nav>
 
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
-    <h2 class="govuk-heading-s">View all products and services in the {{ selectedDeliveryGroup }} group</h2>
+
+    <h2 class="govuk-heading-s">Card view list of all products and services in the {{ selectedDeliveryGroup }} group</h2>
        <ul class="govuk-list">
          {% for group in serviceGroupCounts %}
            {% if group.serviceGroup != "Moving goods into Great Britain;Moving goods out of Great Britain" %}
@@ -27,6 +28,17 @@
            {% endif %}
          {% endfor %}
        </ul>
+
+    <h2 class="govuk-heading-s">Step by step views</h2>
+       <ul class="govuk-list">
+          {% for group in serviceGroupCounts %}
+            {% if group.serviceGroup != "Moving goods into Great Britain;Moving goods out of Great Britain" %}
+              <li><a href="/view-services-in-order/{{ deliveryGroupIndex }}/{{ loop.index0 }}">{{ group.serviceGroup }}: step by step</a></li>
+            {% endif %}
+          {% endfor %}
+       </ul>
+
+
   </div>
 </div>
 
