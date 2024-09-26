@@ -1,6 +1,65 @@
 //
 // For guidance on how to add CSS and SCSS see:
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
-// 
+//
 
 // Add extra styles here
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 20px 0 0 0;
+    padding:0;
+    list-style-type: none;
+}
+
+.card {
+    background-color: white;
+    padding: 2rem;
+    transition: transform 0.2s;
+    border:1px solid #ccc;
+    border-bottom:5px solid #24569C;
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.card p {
+    color: #555;
+}
+
+.card:hover {
+}
+
+.search-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width:100%;
+}
+
+#searchInput {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.hidden {
+    display: none;
+}
+
+.hiddenlink {
+  color:#555;
+  text-decoration: none;
+}
+
+.hiddenlink:visited, .hiddenlink:active, .hiddenlink.govuk-link:visited, .hiddenlink:link  {
+  color:#555;
+  text-decoration: none;
+}

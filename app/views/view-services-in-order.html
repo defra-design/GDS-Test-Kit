@@ -1,0 +1,82 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = selectedServiceGroup + ": step by step" %}
+
+{% block pageScripts %}
+  <script type="text/javascript">
+    var $element = document.querySelector('#step-by-step-navigation')
+    var stepByStepNavigation = new GOVUK.Modules.AppStepNav($element).init()
+  </script>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item"><a href="/view-delivery-groups">Delivery Groups</a></li>
+        <li class="govuk-breadcrumbs__list-item"><a href="/view-service-groups/{{ deliveryGroupIndex }}">Service Groups for {{ selectedDeliveryGroup }}</a></li>
+      </ol>
+    </nav>
+
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+      <div data-module="appstepnav" id="step-by-step-navigation" class="app-step-nav js-hidden app-step-nav--large" data-show-text="Show" data-hide-text="Hide" data-show-all-text="Show all steps" data-hide-all-text="Hide all steps">
+
+       <ol id="servicesList" class="app-step-nav__steps">
+         {% set i = 0 %}
+         {% for service in services %}
+         {% set i = i + 1 %}
+           <li class="app-step-nav__step js-step" id="item-{{ i }}">
+
+             <div class="app-step-nav__header js-toggle-panel" data-position="{{ i }}">
+               <h2 class="app-step-nav__title">
+                 <span class="app-step-nav__circle app-step-nav__circle--number">
+                   <span class="app-step-nav__circle-inner">
+                     <span class="app-step-nav__circle-background">
+                       <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> {{ i }}<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
+                     </span>
+                   </span>
+                 </span>
+
+                 <span class="js-step-title">
+                   {{ service['User facing name'] }}
+                 </span>
+               </h2>
+             </div>
+
+             <div class="app-step-nav__panel js-panel" id="step-panel-item{{ i }}-{{ i }}">
+
+                 {% set userlist = service['User groups'] | split(';') %}
+                 {% set userGroups = "" %}
+                 {% for userlistitem in userlist %}
+                 {% set userGroups = userGroups + userlistitem + ', ' %}
+                 {% endfor %}
+
+               <p class="app-step-nav__paragraph govuk-body-s">A {{ service['Type'] | lower }} for {{ userGroups | lower }} provided by <a class="hiddenlink" href="/services-by-provider/{{ service['Provider'] }}">{{ service['Provider'] }}</a></p>
+
+               <p class="app-step-nav__paragraph govuk-body-m">{{ service['Enables the user to'] }}</p>
+
+               <p class="app-step-nav__paragraph"><a class="govuk-link" href="/service-info/{{ deliveryGroupIndex }}/{{ serviceGroupIndex }}/{{ loop.index0 }}">View details <span class="govuk-visually-hidden">about {{ service['User facing name'] }}</span></a></p>
+
+
+             </div>
+
+           </li>
+         {% endfor %}
+       </ol>
+
+       </div>
+
+  </div>
+</div>
+
+{% endblock %}
