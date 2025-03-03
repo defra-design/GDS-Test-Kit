@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
 
 {% set pageName="Home" %}
 
@@ -7,15 +7,19 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
 
+    <header role="banner" class="site-header">
+    <a href="/">Defra Group Products and Services</a>
+    </header>
+
 
     <h1 class="govuk-heading-l">Defra Services</h1>
-    
+
     <ul class="govuk-list">
        {% for group in deliveryGroups %}
          <li><a href="/list-service/{{ loop.index0 }}">{{ group }}</a></li>
        {% endfor %}
     </ul>
-    
+
   </div>
 </div>
 

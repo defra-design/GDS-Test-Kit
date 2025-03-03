@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
 
 {% set pageName="Home" %}
 
@@ -11,7 +11,7 @@
     <h1 class="govuk-heading-xl">
       {{ serviceName }}
     </h1>
-    
+
     {% if entries.length > 0 %}
       <table class="govuk-table">
         <caption class="govuk-table__caption govuk-table__caption--m">Names and addresses</caption>
