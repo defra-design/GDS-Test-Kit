@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
 
 {% set pageName = selectedServiceGroup + ": step by step" %}
 
@@ -14,10 +14,16 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
 
+    <header role="banner" class="site-header">
+    <a href="/">Defra Group Products and Services</a>
+    </header>
+
+
     <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
       <ol class="breadcrumbs govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item"><a href="/">Home</a></li>
         <li class="govuk-breadcrumbs__list-item"><a href="/view-delivery-groups">Delivery Groups</a></li>
-        <li class="govuk-breadcrumbs__list-item"><a href="/view-service-groups/{{ deliveryGroupIndex }}">Service Groups for {{ selectedDeliveryGroup }}</a></li>
+        <li class="govuk-breadcrumbs__list-item"><a href="/view-service-groups/{{ deliveryGroupIndex }}">{{ selectedDeliveryGroup }}</a></li>
       </ol>
     </nav>
 

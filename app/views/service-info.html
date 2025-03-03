@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
 
 {% set pageName = selectedService['User facing name'] %}
 
@@ -7,17 +7,21 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
 
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+    <header role="banner" class="site-header">
+    <a href="/">Defra Group Products and Services</a>
+    </header>
 
-    <h1 class="govuk-heading-l">{{ pageName }} <!--(Service Group: {{ selectedServiceGroup }}, Delivery Group: {{ selectedDeliveryGroup }})--></h1>
 
     <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
       <ol class="breadcrumbs govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item"><a href="/">Home</a></li>
         <li class="govuk-breadcrumbs__list-item"><a href="/view-delivery-groups">Delivery Groups</a></li>
-        <li class="govuk-breadcrumbs__list-item"><a href="/view-service-groups/{{ deliveryGroupIndex }}">Service Groups for {{ selectedDeliveryGroup }}</a></li>
-        <li class="govuk-breadcrumbs__list-item"><a href="/view-services/{{ deliveryGroupIndex }}/{{ serviceGroupIndex }}">Services for {{ selectedServiceGroup }}</a></li>
+        <li class="govuk-breadcrumbs__list-item"><a href="/view-service-groups/{{ deliveryGroupIndex }}">{{ selectedDeliveryGroup }}</a></li>
+        <li class="govuk-breadcrumbs__list-item"><a href="/view-services/{{ deliveryGroupIndex }}/{{ serviceGroupIndex }}">{{ selectedServiceGroup }}</a></li>
       </ol>
     </nav>
+
+    <h1 class="govuk-heading-l">{{ pageName }} <!--(Service Group: {{ selectedServiceGroup }}, Delivery Group: {{ selectedDeliveryGroup }})--></h1>
 
     <dl class="govuk-summary-list">
 

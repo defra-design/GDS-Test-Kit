@@ -6,6 +6,27 @@
 // Add extra styles here
 
 
+.site-header {
+
+  border-bottom: 2px solid #000;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+
+}
+
+.site-header a{
+  color: #000;
+}
+
+.site-header a:link, .site-header a:visited{
+  text-decoration: none;
+}
+
+.site-header a:hover, .site-header a:active{
+  text-decoration: underline;
+}
+
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
